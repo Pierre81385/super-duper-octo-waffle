@@ -1,10 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import AboutVid from "../assets/about2.mp4";
 import ConnectVid from "../assets/connect2.mp4";
 import DrinksVid from "../assets/drinks2.mp4";
 import musicVid from "../assets/music.mp4";
 import { classes } from "istanbul-lib-coverage";
+import aboutBackground from "../assets/aboutBACKGROUND.jpg";
+import drinksBackground from "../assets/drinksBACKGROUND.jpg";
+import musicBackground from "../assets/musicBACKGROUND.jpg";
+import connectBackground from "../assets/connectBACKGROUND.jpg";
 
 const Main = () => {
   const [mainState, setMainState] = useState({
@@ -20,6 +25,10 @@ const Main = () => {
     drinksVisible: "hidden",
     musicVisible: "hidden",
     connectVisible: "hidden",
+    aboutButtonVis: "hidden",
+    drinksButtonVis: "visible",
+    musicButtonVis: "visible",
+    connectButtonVis: "visible",
   });
 
   const toggleClass = ["col-1", "col-9"];
@@ -33,24 +42,32 @@ const Main = () => {
       display: "flex",
       alignItems: "center",
       zIndex: mainState.aboutIndex,
+      backgroundImage: `URL(${aboutBackground})`,
+      backgroundSize: "auto 100%",
     },
     drinks: {
       backgroundColor: "transparent",
       display: "flex",
       alignItems: "center",
       zIndex: mainState.drinksIndex,
+      backgroundImage: `URL(${drinksBackground})`,
+      backgroundSize: "auto 100%",
     },
     music: {
       backgroundColor: "transparent",
       display: "flex",
       alignItems: "center",
       zIndex: mainState.musicIndex,
+      backgroundImage: `URL(${musicBackground})`,
+      backgroundSize: "auto 100%",
     },
     connect: {
       backgroundColor: "transparent",
       display: "flex",
       alignItems: "center",
       zIndex: mainState.connectIndex,
+      backgroundImage: `URL(${connectBackground})`,
+      backgroundSize: "auto 100%",
     },
     aboutVideo: {
       position: "relative",
@@ -96,11 +113,70 @@ const Main = () => {
       zIndex: mainState.connectIndex,
       visibility: mainState.connectVisible,
     },
-    button: {
+    aboutButton: {
       zIndex: 4,
-      transform: "rotate(-90deg)",
+      transform: "rotate(-90deg) translateY(-50%)",
       color: "white",
       position: "fixed",
+      visibility: mainState.aboutButtonVis,
+      backgroundColor: "rgba(0, 0, 0, 1)",
+    },
+    drinksButton: {
+      zIndex: 4,
+      transform: "rotate(-90deg) translateY(-50%)",
+      color: "white",
+      position: "fixed",
+      visibility: mainState.drinksButtonVis,
+      backgroundColor: "rgba(0, 0, 0, 1)",
+    },
+    musicButton: {
+      zIndex: 4,
+      transform: "rotate(-90deg) translateY(-50%)",
+      color: "white",
+      position: "fixed",
+      visibility: mainState.musicButtonVis,
+      backgroundColor: "rgba(0, 0, 0, 1)",
+    },
+    connectButton: {
+      zIndex: 4,
+      transform: "rotate(-90deg) translateY(-50%)",
+      color: "white",
+      position: "fixed",
+      visibility: mainState.connectButtonVis,
+      padding: "10px",
+      backgroundColor: "rgba(0, 0, 0, 1)",
+    },
+    overlayAbout: {
+      position: "absolute",
+      top: "10%",
+      left: "32%",
+      zIndex: 4,
+      color: "white",
+      alignItems: "center",
+    },
+    overlayDrinks: {
+      position: "absolute",
+      top: "10%",
+      left: "42%",
+      zIndex: 4,
+      color: "white",
+      alignItems: "center",
+    },
+    overlayMusic: {
+      position: "absolute",
+      top: "10%",
+      left: "49%",
+      zIndex: 4,
+      color: "white",
+      alignItems: "center",
+    },
+    overlayShare: {
+      position: "absolute",
+      top: "10%",
+      left: "56%",
+      zIndex: 4,
+      color: "white",
+      alignItems: "center",
     },
   };
 
@@ -121,7 +197,7 @@ const Main = () => {
           >
             <Button
               variant="link"
-              style={style.button}
+              style={style.aboutButton}
               onClick={() => {
                 setMainState({
                   about: 1,
@@ -136,10 +212,14 @@ const Main = () => {
                   drinksVisible: "hidden",
                   musicVisible: "hidden",
                   connectVisible: "hidden",
+                  aboutButtonVis: "hidden",
+                  drinksButtonVis: "visible",
+                  musicButtonVis: "visible",
+                  connectButtonVis: "visible",
                 });
               }}
             >
-              L O C A T I O N
+              A B O U T
             </Button>
             <video
               autoPlay="autoplay"
@@ -152,6 +232,9 @@ const Main = () => {
             >
               <source src={`${AboutVid}`} type="video/mp4" />
             </video>
+            <div style={style.overlayAbout}>
+              <p>Content above your video</p>
+            </div>
           </Col>
           <Col
             className={toggleClass[mainState.drinks]}
@@ -159,7 +242,7 @@ const Main = () => {
           >
             <Button
               variant="link"
-              style={style.button}
+              style={style.drinksButton}
               onClick={() => {
                 setMainState({
                   about: 0,
@@ -174,11 +257,16 @@ const Main = () => {
                   drinksVisible: "visible",
                   musicVisible: "hidden",
                   connectVisible: "hidden",
+                  aboutButtonVis: "visible",
+                  drinksButtonVis: "hidden",
+                  musicButtonVis: "visible",
+                  connectButtonVis: "visible",
                 });
               }}
             >
-              C O C K T A I L S
+              D R I N K
             </Button>
+
             <video
               autoPlay="autoplay"
               loop="loop"
@@ -190,6 +278,9 @@ const Main = () => {
             >
               <source src={`${DrinksVid}`} type="video/mp4" />
             </video>
+            <div style={style.overlayDrinks}>
+              <p>Content above your video</p>
+            </div>
           </Col>
           <Col
             className={toggleClass[mainState.music]}
@@ -197,7 +288,7 @@ const Main = () => {
           >
             <Button
               variant="link"
-              style={style.button}
+              style={style.musicButton}
               onClick={() => {
                 setMainState({
                   about: 0,
@@ -212,10 +303,14 @@ const Main = () => {
                   drinksVisible: "hidden",
                   musicVisible: "visible",
                   connectVisible: "hidden",
+                  aboutButtonVis: "visible",
+                  drinksButtonVis: "visible",
+                  musicButtonVis: "hidden",
+                  connectButtonVis: "visible",
                 });
               }}
             >
-              P E R F O R M A N C E S
+              M U S I C
             </Button>
             <video
               autoPlay="autoplay"
@@ -228,6 +323,9 @@ const Main = () => {
             >
               <source src={`${musicVid}`} type="video/mp4" />
             </video>
+            <div style={style.overlayMusic}>
+              <p>Content above your video</p>
+            </div>
           </Col>
           <Col
             className={toggleClass[mainState.connect]}
@@ -235,7 +333,7 @@ const Main = () => {
           >
             <Button
               variant="link"
-              style={style.button}
+              style={style.connectButton}
               onClick={() => {
                 setMainState({
                   about: 0,
@@ -250,10 +348,14 @@ const Main = () => {
                   drinksVisible: "hidden",
                   musicVisible: "hidden",
                   connectVisible: "visible",
+                  aboutButtonVis: "visible",
+                  drinksButtonVis: "visible",
+                  musicButtonVis: "visible",
+                  connectButtonVis: "hidden",
                 });
               }}
             >
-              C O N N E C T
+              S H A R E
             </Button>
             <video
               autoPlay="autoplay"
@@ -266,6 +368,9 @@ const Main = () => {
             >
               <source src={`${ConnectVid}`} type="video/mp4" />
             </video>
+            <div style={style.overlayShare}>
+              <p>Content above your video</p>
+            </div>
           </Col>
         </Row>
       </Container>
