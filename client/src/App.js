@@ -12,7 +12,6 @@ import { setContext } from "@apollo/client/link/context";
 
 import Header from "./components/header";
 import Main from "./pages/main";
-import Footer from "./components/footer";
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -36,7 +35,12 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Container fluid>
+        <Container
+          fluid
+          style={{
+            backgroundColor: "black",
+          }}
+        >
           <Row>
             <Col>
               <Header />
@@ -48,12 +52,6 @@ function App() {
               <Route exact path="/">
                 <Main />
               </Route>
-            </Col>
-          </Row>
-
-          <Row>
-            <Col>
-              <Footer />
             </Col>
           </Row>
         </Container>

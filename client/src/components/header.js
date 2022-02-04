@@ -1,3 +1,5 @@
+import logo from "../assets/logo.png";
+
 const Header = () => {
   const style = {
     header: {
@@ -11,6 +13,12 @@ const Header = () => {
       justifyContent: "center",
       alignItems: "center",
     },
+    img: {
+      width: "200px",
+    },
+    text: {
+      color: "white",
+    },
   };
   return (
     <header
@@ -18,7 +26,9 @@ const Header = () => {
       className="text-dark mb-4 py-3 display-flex align-center"
     >
       <div style={style.content}>
-        <h1 style={style.text}>"[ logo ][ title ][ admin ]"</h1>
+        <h1 style={style.text}>INFINIT</h1>
+        <img src={logo} alt="coffee logo" style={style.img}></img>
+        <h1 style={style.text}>NIGHTCLUB</h1>
       </div>
     </header>
   );
