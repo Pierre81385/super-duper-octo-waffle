@@ -12,6 +12,8 @@ import musicBackground from "../assets/musicBACKGROUND.jpg";
 import connectBackground from "../assets/connectBACKGROUND.jpg";
 import About from "../pages/about";
 import DrinkMenu from "./menu";
+import Events from "./events";
+import Connect from "./connect";
 
 const Main = () => {
   const [mainState, setMainState] = useState({
@@ -184,8 +186,8 @@ const Main = () => {
       color: "white",
       alignItems: "center",
       visibility: mainState.musicVisible,
-      overFlowX: "hidden",
-      overflowY: "scroll",
+      //overFlowX: "hidden",
+      //overflowY: "scroll",
     },
     overlayShare: {
       position: "absolute",
@@ -343,7 +345,7 @@ const Main = () => {
               <source src={`${musicVid}`} type="video/mp4" />
             </video>
             <div style={style.overlayMusic}>
-              <p>Content above your video</p>
+              <Events />
             </div>
           </Col>
           <Col
@@ -388,7 +390,7 @@ const Main = () => {
               <source src={`${ConnectVid}`} type="video/mp4" />
             </video>
             <div style={style.overlayShare}>
-              <p>Content above your video</p>
+              <Connect />
             </div>
           </Col>
         </Row>
