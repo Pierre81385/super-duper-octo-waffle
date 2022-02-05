@@ -10,6 +10,8 @@ import aboutBackground from "../assets/aboutBACKGROUND.jpg";
 import drinksBackground from "../assets/drinksBACKGROUND.jpg";
 import musicBackground from "../assets/musicBACKGROUND.jpg";
 import connectBackground from "../assets/connectBACKGROUND.jpg";
+import About from "../pages/about";
+import DrinkMenu from "./menu";
 
 const Main = () => {
   const [mainState, setMainState] = useState({
@@ -44,6 +46,7 @@ const Main = () => {
       zIndex: mainState.aboutIndex,
       backgroundImage: `URL(${aboutBackground})`,
       backgroundSize: "auto 100%",
+      zIndex: 1,
     },
     drinks: {
       backgroundColor: "transparent",
@@ -52,7 +55,9 @@ const Main = () => {
       zIndex: mainState.drinksIndex,
       backgroundImage: `URL(${drinksBackground})`,
       backgroundSize: "auto 100%",
+      zIndex: 1,
     },
+
     music: {
       backgroundColor: "transparent",
       display: "flex",
@@ -60,6 +65,7 @@ const Main = () => {
       zIndex: mainState.musicIndex,
       backgroundImage: `URL(${musicBackground})`,
       backgroundSize: "auto 100%",
+      zIndex: 1,
     },
     connect: {
       backgroundColor: "transparent",
@@ -68,6 +74,7 @@ const Main = () => {
       zIndex: mainState.connectIndex,
       backgroundImage: `URL(${connectBackground})`,
       backgroundSize: "auto 100%",
+      zIndex: 1,
     },
     aboutVideo: {
       position: "relative",
@@ -114,69 +121,81 @@ const Main = () => {
       visibility: mainState.connectVisible,
     },
     aboutButton: {
-      zIndex: 4,
+      zIndex: 999,
       transform: "rotate(-90deg) translateY(-50%)",
       color: "white",
       position: "fixed",
       visibility: mainState.aboutButtonVis,
       backgroundColor: "rgba(0, 0, 0, 1)",
+      whiteSpace: "nowrap",
     },
     drinksButton: {
-      zIndex: 4,
+      zIndex: 999,
       transform: "rotate(-90deg) translateY(-50%)",
       color: "white",
       position: "fixed",
       visibility: mainState.drinksButtonVis,
       backgroundColor: "rgba(0, 0, 0, 1)",
+      whiteSpace: "nowrap",
     },
     musicButton: {
-      zIndex: 4,
+      zIndex: 999,
       transform: "rotate(-90deg) translateY(-50%)",
       color: "white",
       position: "fixed",
       visibility: mainState.musicButtonVis,
       backgroundColor: "rgba(0, 0, 0, 1)",
+      whiteSpace: "nowrap",
     },
     connectButton: {
-      zIndex: 4,
+      zIndex: 999,
       transform: "rotate(-90deg) translateY(-50%)",
       color: "white",
       position: "fixed",
       visibility: mainState.connectButtonVis,
       padding: "10px",
       backgroundColor: "rgba(0, 0, 0, 1)",
+      whiteSpace: "nowrap",
     },
     overlayAbout: {
       position: "absolute",
-      top: "10%",
-      left: "32%",
-      zIndex: 4,
+      objectFit: "cover",
+      zIndex: 3,
       color: "white",
       alignItems: "center",
+      visibility: mainState.aboutVisible,
+      overFlowX: "hidden",
+      overflowY: "scroll",
     },
     overlayDrinks: {
       position: "absolute",
-      top: "10%",
-      left: "42%",
-      zIndex: 4,
+      objectFit: "scale-down",
+      zIndex: 3,
       color: "white",
       alignItems: "center",
+      visibility: mainState.drinksVisible,
+      overFlowX: "hidden",
+      overflowY: "scroll",
     },
     overlayMusic: {
       position: "absolute",
-      top: "10%",
-      left: "49%",
-      zIndex: 4,
+      objectFit: "cover",
+      zIndex: 3,
       color: "white",
       alignItems: "center",
+      visibility: mainState.musicVisible,
+      overFlowX: "hidden",
+      overflowY: "scroll",
     },
     overlayShare: {
       position: "absolute",
-      top: "10%",
-      left: "56%",
-      zIndex: 4,
+      objectFit: "cover",
+      zIndex: 3,
       color: "white",
       alignItems: "center",
+      visibility: mainState.connectVisible,
+      overFlowX: "hidden",
+      overflowY: "scroll",
     },
   };
 
@@ -189,7 +208,7 @@ const Main = () => {
       }}
     >
       <Container fluid>
-        <Row>
+        <Row noGutters={true}>
           <Col
             className={toggleClass[mainState.about]}
             style={{ ...style.about, ...style.column }}
@@ -233,7 +252,7 @@ const Main = () => {
               <source src={`${AboutVid}`} type="video/mp4" />
             </video>
             <div style={style.overlayAbout}>
-              <p>Content above your video</p>
+              <About />
             </div>
           </Col>
           <Col
@@ -279,7 +298,7 @@ const Main = () => {
               <source src={`${DrinksVid}`} type="video/mp4" />
             </video>
             <div style={style.overlayDrinks}>
-              <p>Content above your video</p>
+              <DrinkMenu />
             </div>
           </Col>
           <Col
